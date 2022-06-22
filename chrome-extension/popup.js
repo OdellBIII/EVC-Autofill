@@ -31,7 +31,10 @@ function changeHolderText(val){
 // Strip url to just the domain
 function stripUrl(url){
 
-    const endIndex = url.indexOf(".com") + 4;
+    var result = url
+    // Trim off 'www.'
+    result = result.replace("www.","")
+    const endIndex = result.indexOf(".com") + 4;
 
-    return url.slice(8, endIndex);
+    return result.slice(8, endIndex);
 }
