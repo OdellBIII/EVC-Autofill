@@ -1,6 +1,9 @@
 {
     "name" : "Email Verifcation Code Autofill",
     "description" : "Email Verification Code Autofill tool",
+    "icons" : {
+        "128" : "icon128.png"
+    },
     "version" : "1.0",
     "manifest_version" : 3,
     "background" : {
@@ -11,9 +14,12 @@
         "identity"
     ],
     "oauth2" : {
-        "client_id" : "122228461155-8rjqlq3168l5jpim8ls87cng9hesvsv9.apps.googleusercontent.com",
+        "client_id" : "122228461155-63ihpaf1f551l2rk3t4cdglp8rnss6si.apps.googleusercontent.com",
         "scopes" : [
             "https://www.googleapis.com/auth/gmail.readonly"
         ]
+    },
+    "action" : {
+
     }
 }
