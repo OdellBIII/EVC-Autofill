@@ -7,7 +7,7 @@ chrome.runtime.onInstalled.addListener(() => {
         const verificationCodeEmail = 'noreply@' + domainName;
 
         console.log("Hello world!");
-        chrome.identity.getAuthToken( {'interactive' : true}, (token) => {
+        chrome.identity.getAuthToken( {interactive : true}, (token) => {
             console.log("Inside of callback");
             console.log(token);
         });

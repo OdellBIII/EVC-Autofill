@@ -1,1 +1,6 @@
 client_secret_*
+*.pem
+*.crx
+*.xcf
+*.zip
+*/node_modules
