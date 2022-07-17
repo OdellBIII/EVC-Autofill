@@ -1,0 +1,33 @@
+.grid-container {
+
+    display: grid;
+    gap: 50px 100px;
+    min-width: 500px;
+    min-height: 500px;
+}
+
+#grid-item-1 {
+
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+#grid-item-2 {
+
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+#evc-button {
+
+    /*
+    margin-left: 90%;
+    margin-right: 90%;
+    */
+}

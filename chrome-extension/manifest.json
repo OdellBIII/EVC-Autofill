@@ -9,9 +9,13 @@
     "background" : {
         "service_worker" : "background.js"
     },
+    "action" : {
+        "default_popup" : "popup.html"
+    },
     "permissions" : [
         "tabs", 
-        "identity"
+        "identity",
+        "storage"
     ],
     "oauth2" : {
         "client_id" : "122228461155-63ihpaf1f551l2rk3t4cdglp8rnss6si.apps.googleusercontent.com",
@@ -19,8 +23,6 @@
             "https://www.googleapis.com/auth/gmail.readonly"
         ]
     },
-    "action" : {
 
-    },
     "key" : "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkR6BGynvCRz8OGPxe/bT7MO2iBtmnmHEtogWSjWa7/Ob1wHHWilTFDrDrsd53uOjojPAnifkL0I4jE5c7pGU1wadaMYKX1CUSRYRjdOT+aKqk4TP78IGMiaR7xSwXsC4dZMjEa87wv6S52Cs4fnRg+n9Z52vbRZWY3xFG2JnPjaEpSnuQxSnlBB1KWr6lkRZq9RhEJ0HI5Tx0mZ8W5eIosr/JgY03m+G/OXb2gUFNtRk+UvPN2FrhEmRJeb0tmEXInvplMVkXOwvVteb93rUWhfrbluQOm4+F6PzVGHvPkNlF7pMgMG9TYTH2ncE/dvglMNUuLUFIPpvYDBSJi3+cQIDAQAB"
 }
