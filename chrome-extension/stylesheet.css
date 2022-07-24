@@ -1,18 +1,113 @@
+ul {
+
+    align-self: center;
+    list-style: none;
+}
+
+body {
+
+    background-color: #E6EBE0;
+}
+
 .grid-container {
 
-    display: grid;
+    /*display: grid;*/
     gap: 50px 100px;
     min-width: 500px;
     min-height: 500px;
 }
 
-#grid-item-1 {
+.container{
 
-    grid-column-start: 1;
-    grid-column-end: 3;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+}
 
-    grid-row-start: 1;
-    grid-row-end: 2;
+.delete-button {
+
+    position: relative;
+    top: 40%;
+    left: 20%;
+
+    border: none;
+    background: none;
+}
+
+.delete-button-container {
+
+    display: inline-block;
+    height: 93px;
+    width: 50px;
+}
+
+.x-leg-right {
+
+    position: relative;
+    width: 3.77px;
+    height: 15px;
+    left: 50%;
+    top: 25%;
+
+    background: #000000;
+    transform: rotate(-135deg);
+}
+
+.x-leg-left {
+    position: relative;
+    width: 3.77px;
+    height: 16.39px;
+    left: 10%;
+    top: 0%;
+    
+    background: #000000;
+    transform: rotate(-45deg);
+}
+
+.email-list-child-outer {
+
+    display: inline-block;
+
+    width: 302px;
+    height: 93px;
+    left: 183px;
+    top: 186px;
+    background: #9BC1BC;
+    border-radius: 15px;
+}
+
+.email-input-container {
+    padding-top: 10px;
+}
+
+.email-list-child-text {
+
+    position: relative;
+    width: 252px;
+    height: 15px;
+    top: 30%;
+    left: 10%;
+
+    font-family: 'Verdana', 'sans-serif';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 15px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #ffffff;
+}
+
+.new-email-input {
+
+    position: relative;
+    top: 40%;
+    left: 25%;
+
+    background: #E6EBE0;
+    border: none;
 }
 
 #grid-item-2 {
@@ -24,10 +119,14 @@
     grid-row-end: 3;
 }
 
-#evc-button {
+#save-email-button {
 
-    /*
-    margin-left: 90%;
-    margin-right: 90%;
-    */
+    background: none;
+    border: none;
+}
+
+#save-email-button > img {
+
+    width: 30px;
+    height: 30px;
 }

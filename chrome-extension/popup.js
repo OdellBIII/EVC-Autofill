@@ -2,18 +2,56 @@
 window.addEventListener('load', renderEmails);
 
 let saveEmailBtn = document.getElementById("save-email-button");
-let removeAllEmailsBtn = document.getElementById("remove-all-emails-button");
 
 // When the button is clicked, add email to the list of emails to be displayed
-saveEmailBtn.addEventListener('click', async () => {
+saveEmailBtn.addEventListener('click', function() {
 
-    const newEmail = document.getElementById("emailForm").value;
+    let emailList = document.getElementById("email-list");
+    let newEmailInput = createEmailInput();
+    let newEmailListEle = document.createElement("li");
+    newEmailListEle.appendChild(newEmailInput);
+    emailList.appendChild(newEmailListEle);
+    saveEmailBtn.disabled = true;
+});
+
+function createEmailInput(){
+
+    let newElementContainer = document.createElement("div");
+    newElementContainer.className = "email-input-container";
+    let newEmailContainer = document.createElement("div");
+    newEmailContainer.className = "email-list-child-outer";
+
+    let newEmailInput = document.createElement("input");
+    newEmailInput.type = "text";
+    newEmailInput.className = "new-email-input";
+    newEmailInput.addEventListener('change', function(e){
+
+        const newEmailAddress = e.target.value;
+        if(newEmailAddress !== ""){
+
+            addEmail(newEmailAddress);
+        }else{
+
+            renderEmails();
+        }
+
+        saveEmailBtn.disabled = false;
+    });
+
+    newEmailContainer.appendChild(newEmailInput);
+    newElementContainer.appendChild(newEmailContainer);
+
+    return newElementContainer;
+}
+
+function addEmail(emailAddress){
+
     chrome.storage.local.get(['emails'], function(result){
         console.log(result);
 
         if(result.emails != undefined){
 
-            result.emails.push(newEmail);
+            result.emails.push(emailAddress);
             console.log(result.emails);
             chrome.storage.local.set({'emails' : result.emails}, function(){
 
@@ -21,21 +59,32 @@ saveEmailBtn.addEventListener('click', async () => {
             });
         }else{
             console.log(result.emails);
-            chrome.storage.local.set({'emails' : [newEmail]});
+            chrome.storage.local.set({'emails' : [emailAddress]});
 
         }
     });
-});
+}
 
-// When the button is clicked, all email addresses are cleared from local google storage
-removeAllEmailsBtn.addEventListener('click', async () =>{
+function removeEmail(emailAddress){
 
-    chrome.storage.local.set({'emails' : []}, function(){
+    console.log("Removing " + emailAddress + "from list");
+    chrome.storage.local.get(['emails'], function(result){
+        console.log(result);
 
-        renderEmails();
+        if(result.emails != undefined){
+
+            let newEmailArray = result.emails.filter(currentEmailAddress => {
+
+                return emailAddress !== currentEmailAddress;
+            });
+
+            chrome.storage.local.set({'emails' : newEmailArray}, function(){
+
+                renderEmails();
+            });
+        }
     });
-
-});
+}
 
 // Creates buttons for the emails and inserts them into page
 function renderEmails(){
@@ -63,15 +112,63 @@ function renderEmails(){
 
 function createEmailListChild(emailAddress){
 
-    let emailButton = document.createElement("button");
-    emailButton.textContent = emailAddress;
-    emailButton.name = emailAddress;
-    emailButton.addEventListener("click", emailButtonEventListener);
+    let emailElement = createEmailButton(emailAddress);
 
     let liElement = document.createElement("li");
-    liElement.appendChild(emailButton);
+    liElement.appendChild(emailElement);
 
     return liElement;
+}
+
+function createEmailButton(emailAddress){
+
+    
+    let emailButtonItem = document.createElement("div");
+    let emailButton = document.createElement("div");
+    emailButton.className = "email-list-child-outer";
+    emailButton.addEventListener("click", emailButtonEventListener);
+    emailButton.name = emailAddress;
+
+    let emailButtonText = document.createElement("p");
+    emailButtonText.className = "email-list-child-text";
+    emailButtonText.innerText = emailAddress;
+
+    let deleteEmailButton = createDeleteEmailButton(emailAddress);
+
+    emailButton.appendChild(emailButtonText);
+
+    emailButtonItem.appendChild(emailButton);
+    emailButtonItem.appendChild(deleteEmailButton);
+
+    return emailButtonItem;
+}
+
+function createDeleteEmailButton(emailAddress){
+
+    let deleteEmailButtonContainer = document.createElement("div");
+    deleteEmailButtonContainer.className = "delete-button-container";
+
+    let deleteEmailButton = document.createElement("button");
+    //deleteEmailButton.textContent = "x";
+    //deleteEmailButton.title = emailAddress;
+    deleteEmailButton.addEventListener("click", deleteEmailEventListener);
+    deleteEmailButton.className = "delete-button";
+
+    let deleteEmailButtonImage = document.createElement("img");
+    deleteEmailButtonImage.src = "images/delete-button.png";
+    deleteEmailButtonImage.alt = emailAddress;
+
+    deleteEmailButton.appendChild(deleteEmailButtonImage);
+    deleteEmailButtonContainer.appendChild(deleteEmailButton);
+
+    return deleteEmailButtonContainer;
+}
+
+function deleteEmailEventListener(e){
+
+    const emailAddress = e.target.alt;
+
+    removeEmail(emailAddress);
 }
 
 function emailButtonEventListener(e){
