@@ -7,6 +7,7 @@ ul {
 body {
 
     background-color: #E6EBE0;
+    margin: 0px;
 }
 
 .grid-container {
@@ -19,7 +20,7 @@ body {
 
 .container{
 
-    width: 500px;
+    width: 400px;
     display: flex;
     justify-content: center;
 }
@@ -39,29 +40,6 @@ body {
     display: inline-block;
     height: 93px;
     width: 50px;
-}
-
-.x-leg-right {
-
-    position: relative;
-    width: 3.77px;
-    height: 15px;
-    left: 50%;
-    top: 25%;
-
-    background: #000000;
-    transform: rotate(-135deg);
-}
-
-.x-leg-left {
-    position: relative;
-    width: 3.77px;
-    height: 16.39px;
-    left: 10%;
-    top: 0%;
-    
-    background: #000000;
-    transform: rotate(-45deg);
 }
 
 .email-list-child-outer {
@@ -110,6 +88,11 @@ body {
     border: none;
 }
 
+.evc-container {
+
+    background-color: #456990;
+}
+
 #grid-item-2 {
 
     grid-column-start: 1;
@@ -129,4 +112,20 @@ body {
 
     width: 30px;
     height: 30px;
+}
+
+#evc-holder {
+
+    color: white;
+    font-family: 'Inter';
+    font-size: 40px;
+}
+
+#copy-to-clipboard {
+
+    position: relative;
+    left: 59%;
+    top: 12.5px;
+    width: 25px;
+    height: 25px;
 }

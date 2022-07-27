@@ -1,18 +1,56 @@
 
-window.addEventListener('load', renderEmails);
+window.addEventListener('load', init);
 
-let saveEmailBtn = document.getElementById("save-email-button");
+/*
+class EmailList {
 
-// When the button is clicked, add email to the list of emails to be displayed
-saveEmailBtn.addEventListener('click', function() {
+    constructor(){
 
-    let emailList = document.getElementById("email-list");
-    let newEmailInput = createEmailInput();
-    let newEmailListEle = document.createElement("li");
-    newEmailListEle.appendChild(newEmailInput);
-    emailList.appendChild(newEmailListEle);
-    saveEmailBtn.disabled = true;
-});
+        this.emailListNode = document.getElementById("email-list");
+
+    }
+
+    renderEmails(){
+
+        console.log("Render function called!");
+
+        // Clear current children from list
+        this.clearEmailListNode();
+
+        // Get emails
+        chrome.storage.local.get(['emails'], function(result){
+
+            let emails = result.emails;
+            // Iterate over emails
+            for(let i = 0; i < emails.length; i++){
+                // Create button for each email and make child of an object
+                let emailAddress = emails[i];
+                let emailListChild = createEmailListChild(emailAddress);
+                this.emailList.appendChild(emailListChild);
+            }
+        });
+    }
+
+    clearEmailListNode(){
+
+        while(this.emailList.hasChildNodes()){
+            emailList.removeChild(emailList.firstChild);
+        }
+
+    }
+
+    createEmailListChild(emailAddress){
+
+    }
+}
+*/
+
+function copyToClipboard(){
+
+    let emailVerificationCode = document.getElementById("evc-holder").innerText;
+    navigator.clipboard.writeText(emailVerificationCode);
+
+}
 
 function createEmailInput(){
 
@@ -173,10 +211,9 @@ function deleteEmailEventListener(e){
 
 function emailButtonEventListener(e){
 
-    const emailAddress = e.target.name;
-    //const domain = stripUrl(getCurrentTab());
-    //const noreplyEmail = 'noreply@' + domain;
-    const noreplyEmail = 'magictre1234@gmail.com';
+    const emailAddress = e.currentTarget.name;
+    const domain = stripUrl(getCurrentTab());
+    const noreplyEmail = 'noreply@' + domain;
 
     const requestUrl = 'https://evc-web.herokuapp.com/checkEmail?senderEmail=' + noreplyEmail + '&receiverEmail=' + emailAddress; 
     fetch(requestUrl).then(response => {
@@ -212,4 +249,26 @@ function stripUrl(url){
     const endIndex = result.indexOf(".com") + 4;
 
     return result.slice(8, endIndex);
+}
+
+function init(){
+
+    renderEmails();
+
+    let saveEmailBtn = document.getElementById("save-email-button");
+
+    // When the button is clicked, add email to the list of emails to be displayed
+    saveEmailBtn.addEventListener('click', function() {
+
+        let emailList = document.getElementById("email-list");
+        let newEmailInput = createEmailInput();
+        let newEmailListEle = document.createElement("li");
+        newEmailListEle.appendChild(newEmailInput);
+        emailList.appendChild(newEmailListEle);
+        saveEmailBtn.disabled = true;
+    });
+
+    let copyToClipboardIcon = document.getElementById("copy-to-clipboard");
+
+    copyToClipboardIcon.addEventListener('click', copyToClipboard);
 }
