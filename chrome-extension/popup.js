@@ -1,50 +1,6 @@
 
 window.addEventListener('load', init);
 
-/*
-class EmailList {
-
-    constructor(){
-
-        this.emailListNode = document.getElementById("email-list");
-
-    }
-
-    renderEmails(){
-
-        console.log("Render function called!");
-
-        // Clear current children from list
-        this.clearEmailListNode();
-
-        // Get emails
-        chrome.storage.local.get(['emails'], function(result){
-
-            let emails = result.emails;
-            // Iterate over emails
-            for(let i = 0; i < emails.length; i++){
-                // Create button for each email and make child of an object
-                let emailAddress = emails[i];
-                let emailListChild = createEmailListChild(emailAddress);
-                this.emailList.appendChild(emailListChild);
-            }
-        });
-    }
-
-    clearEmailListNode(){
-
-        while(this.emailList.hasChildNodes()){
-            emailList.removeChild(emailList.firstChild);
-        }
-
-    }
-
-    createEmailListChild(emailAddress){
-
-    }
-}
-*/
-
 function copyToClipboard(){
 
     let emailVerificationCode = document.getElementById("evc-holder").innerText;
@@ -227,6 +183,7 @@ function emailButtonEventListener(e){
 
 }
 
+// Remove the tab object for the currently open tab
 async function getCurrentTab() {
     let queryOptions = { active: true, lastFocusedWindow: true };
     // `tab` will either be a `tabs.Tab` instance or `undefined`.
@@ -234,6 +191,7 @@ async function getCurrentTab() {
     return tab;
 }
 
+// Change the holder text to val
 function changeHolderText(val){
 
     let evcHolder = document.getElementById("evc-holder");
